@@ -3,132 +3,379 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Amanda Smith</title>
+  <title>BET Awards Night — Potluck</title>
+  <meta name="description" content="You're invited to a BET Music Awards Night potluck. RSVP and tell us what you're bringing!" />
   <style>
-    /* ===== EDIT COLORS & FONTS HERE ===== */
     :root {
-      --bg: #0f172a;          /* page background */
-      --card: #1e293b;        /* card background */
-      --accent: #38bdf8;      /* highlight color */
-      --text: #e2e8f0;        /* main text */
-      --muted: #94a3b8;       /* softer text */
+      --black: #0a0a0a;
+      --panel: #141414;
+      --gold: #e8c252;
+      --gold-deep: #b8901f;
+      --text: #f5f0e6;
+      --muted: #b6ad96;
+      --border: #2a2620;
+      --radius: 16px;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg);
+      font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+      background:
+        radial-gradient(900px 500px at 50% -10%, rgba(232,194,82,0.18), transparent 60%),
+        var(--black);
       color: var(--text);
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
     }
 
-    .card {
-      background: var(--card);
-      max-width: 640px;
-      width: 100%;
-      border-radius: 20px;
-      padding: 48px 40px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 22px; }
+
+    /* ---- Hero ---- */
+    header { padding: 70px 0 40px; text-align: center; }
+
+    .eyebrow {
+      display: inline-block;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      color: var(--gold);
+      border: 1px solid var(--gold-deep);
+      border-radius: 999px;
+      padding: 7px 16px;
+      margin-bottom: 22px;
     }
 
-    .avatar {
-      width: 96px;
-      height: 96px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), #818cf8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 40px;
-      font-weight: 700;
-      color: #0f172a;
-      margin-bottom: 24px;
-    }
+    .trophy { font-size: 3rem; line-height: 1; margin-bottom: 8px; }
 
     h1 {
-      font-size: 32px;
-      margin-bottom: 4px;
+      font-size: clamp(2.3rem, 8vw, 4rem);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      font-weight: 800;
+      background: linear-gradient(180deg, #fff7df 0%, var(--gold) 55%, var(--gold-deep) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 10px;
     }
 
-    .tagline {
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 24px;
-    }
+    .sub { color: var(--muted); font-size: 1.1rem; max-width: 30ch; margin: 0 auto; }
 
-    .bio {
-      color: var(--muted);
-      margin-bottom: 32px;
+    .cta {
+      display: inline-block;
+      margin-top: 26px;
+      padding: 13px 30px;
+      background: linear-gradient(180deg, var(--gold) 0%, var(--gold-deep) 100%);
+      color: #1a1407;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      border-radius: 999px;
+      box-shadow: 0 10px 30px rgba(232,194,82,0.25);
+      transition: transform 0.15s, box-shadow 0.15s;
     }
+    .cta:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(232,194,82,0.35); }
 
-    .section-title {
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--muted);
-      margin-bottom: 12px;
-    }
-
-    .links {
+    /* ---- Detail chips ---- */
+    .details {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
+      justify-content: center;
+      margin: 38px 0 10px;
     }
+    .chip {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      min-width: 150px;
+      text-align: center;
+    }
+    .chip .k { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); }
+    .chip .v { font-weight: 700; font-size: 1.02rem; margin-top: 3px; }
 
-    .links a {
-      text-decoration: none;
+    /* ---- Sections ---- */
+    section { padding: 34px 0; border-top: 1px solid var(--border); }
+    h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    h2 .accent { color: var(--gold); }
+    .lead { color: var(--muted); margin-bottom: 22px; }
+
+    /* ---- Form ---- */
+    .field { margin-bottom: 16px; }
+    label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.92rem; }
+    label .req { color: var(--gold); }
+
+    input, select, textarea {
+      width: 100%;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
       color: var(--text);
-      background: rgba(255, 255, 255, 0.06);
-      padding: 10px 18px;
-      border-radius: 999px;
-      font-weight: 500;
-      transition: all 0.2s ease;
+      padding: 12px 14px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.15s, box-shadow 0.15s;
     }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(232,194,82,0.15);
+    }
+    textarea { resize: vertical; min-height: 76px; }
 
-    .links a:hover {
-      background: var(--accent);
-      color: #0f172a;
-      transform: translateY(-2px);
-    }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 520px) { .row { grid-template-columns: 1fr; } }
 
-    footer {
-      margin-top: 36px;
-      font-size: 13px;
-      color: var(--muted);
+    .toggle { display: flex; gap: 10px; }
+    .toggle label {
+      flex: 1; margin: 0; cursor: pointer;
+      text-align: center; padding: 12px;
+      background: var(--panel); border: 1px solid var(--border);
+      border-radius: 12px; font-weight: 700;
+      transition: all 0.15s;
     }
+    .toggle input { display: none; }
+    .toggle input:checked + span { color: var(--gold); }
+    .toggle label:has(input:checked) { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(232,194,82,0.12); }
+
+    button.submit {
+      width: 100%;
+      margin-top: 8px;
+      padding: 15px;
+      background: linear-gradient(180deg, var(--gold) 0%, var(--gold-deep) 100%);
+      color: #1a1407;
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: 0.03em;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.15s, opacity 0.15s;
+    }
+    button.submit:hover { transform: translateY(-1px); }
+    button.submit:disabled { opacity: 0.6; cursor: progress; transform: none; }
+
+    .formnote {
+      margin-top: 14px; padding: 12px 14px; border-radius: 12px;
+      font-size: 0.92rem; display: none;
+    }
+    .formnote.ok { display: block; background: rgba(232,194,82,0.12); border: 1px solid var(--gold-deep); color: var(--text); }
+    .formnote.err { display: block; background: rgba(255,80,80,0.1); border: 1px solid #aa3b3b; color: #ffd9d9; }
+
+    /* ---- Live list ---- */
+    .board { display: grid; gap: 10px; }
+    .guest {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--panel); border: 1px solid var(--border);
+      border-radius: 12px; padding: 13px 16px;
+    }
+    .guest .badge {
+      width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+      color: #1a1407; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .guest .who { font-weight: 700; }
+    .guest .what { color: var(--muted); font-size: 0.9rem; }
+    .guest .cat {
+      margin-left: auto; flex-shrink: 0;
+      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--gold); border: 1px solid var(--gold-deep);
+      border-radius: 999px; padding: 4px 10px;
+    }
+    .empty, .loading { color: var(--muted); text-align: center; padding: 20px; }
+
+    footer { padding: 40px 0 60px; text-align: center; color: var(--muted); font-size: 0.85rem; }
   </style>
 </head>
 <body>
-  <main class="card">
-    <!-- The avatar shows your initials. Change "AS" below. -->
-    <div class="avatar">AS</div>
+  <div class="wrap">
+    <header>
+      <span class="eyebrow">You're on the list</span>
+      <div class="trophy">🏆🎤</div>
+      <h1>BET Awards Night</h1>
+      <p class="sub">A red-carpet potluck — dress to impress, bring a dish, and let's celebrate.</p>
+      <a class="cta" href="#rsvp">RSVP on the red carpet →</a>
 
-    <!-- ===== EDIT YOUR DETAILS HERE ===== -->
-    <h1>Amanda Smith</h1>
-    <p class="tagline">Hello, world 👋</p>
+      <div class="details">
+        <div class="chip"><div class="k">Date</div><div class="v">Sat, July 18</div></div>
+        <div class="chip"><div class="k">Time</div><div class="v">7:00 PM</div></div>
+        <div class="chip"><div class="k">Place</div><div class="v">My place 📍</div></div>
+        <div class="chip"><div class="k">Dress code</div><div class="v">Red-carpet glam ✨</div></div>
+      </div>
+    </header>
 
-    <p class="bio">
-      This is my personal page. I'm just getting started — soon this will tell you
-      a bit about who I am, what I'm interested in, and what I'm working on.
-    </p>
+    <main>
+      <section id="rsvp">
+        <h2><span class="accent">①</span> RSVP &amp; what you're bringing</h2>
+        <p class="lead">Fill this out and your dish shows up on the live list below.</p>
 
-    <p class="section-title">Find me</p>
-    <div class="links">
-      <a href="mailto:amanda.smith@alyenergy.com">Email</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">GitHub</a>
-      <a href="#">Twitter / X</a>
-    </div>
+        <form id="rsvpForm" autocomplete="on">
+          <div class="field">
+            <label for="name">Your name <span class="req">*</span></label>
+            <input id="name" name="name" type="text" required placeholder="e.g. Alya H." />
+          </div>
+
+          <div class="field">
+            <label>Are you coming? <span class="req">*</span></label>
+            <div class="toggle">
+              <label><input type="radio" name="attending" value="Yes" checked /><span>🎟️ Yes, I'll be there</span></label>
+              <label><input type="radio" name="attending" value="No" /><span>😢 Can't make it</span></label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="party">How many in your party?</label>
+              <input id="party" name="party" type="number" min="1" value="1" />
+            </div>
+            <div class="field">
+              <label for="category">Dish category</label>
+              <select id="category" name="category">
+                <option value="Appetizer">🥟 Appetizer</option>
+                <option value="Main">🍗 Main dish</option>
+                <option value="Side">🥗 Side</option>
+                <option value="Dessert">🍰 Dessert</option>
+                <option value="Drinks">🥤 Drinks</option>
+                <option value="Other">✨ Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="dish">What are you bringing?</label>
+            <input id="dish" name="dish" type="text" placeholder="e.g. Jollof rice, mac &amp; cheese, sangria..." />
+          </div>
+
+          <div class="field">
+            <label for="message">Message for the host (optional)</label>
+            <textarea id="message" name="message" placeholder="Anything we should know? Allergies, +1 names, song requests 🎶"></textarea>
+          </div>
+
+          <button class="submit" type="submit">Send my RSVP 🎬</button>
+          <div class="formnote" id="formnote"></div>
+        </form>
+      </section>
+
+      <section id="list">
+        <h2><span class="accent">②</span> The lineup — who's bringing what</h2>
+        <p class="lead">Live from the kitchen. Refreshes after every RSVP.</p>
+        <div class="board" id="board">
+          <div class="loading">Loading the lineup…</div>
+        </div>
+      </section>
+    </main>
 
     <footer>
-      Built with curiosity · 2026
+      Hosted with love · BET Awards Night Potluck 🎶
     </footer>
-  </main>
+  </div>
+
+  <script>
+    // =====================================================================
+    //  SETUP: paste your Google Apps Script Web App URL between the quotes.
+    //  (Deploy instructions are in the chat / README.)
+    // =====================================================================
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzZIoRcabeNum6cI1c6SIlZ7EWUa0SyOBzlcv8OgsTMRH3_XQh4BeK-7LyN4TtQsD5lJg/exec";
+    // =====================================================================
+
+    const form = document.getElementById("rsvpForm");
+    const note = document.getElementById("formnote");
+    const board = document.getElementById("board");
+
+    function showNote(msg, kind) {
+      note.textContent = msg;
+      note.className = "formnote " + kind;
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!SCRIPT_URL || SCRIPT_URL.indexOf("PASTE_YOUR") === 0) {
+        showNote("⚠️ The host hasn't connected the RSVP backend yet. (SCRIPT_URL not set.)", "err");
+        return;
+      }
+      const btn = form.querySelector("button.submit");
+      btn.disabled = true;
+      btn.textContent = "Sending…";
+
+      const data = new URLSearchParams(new FormData(form));
+      fetch(SCRIPT_URL, { method: "POST", mode: "no-cors", body: data })
+        .then(function () {
+          showNote("🎉 You're on the list! Thanks for RSVPing.", "ok");
+          form.reset();
+          setTimeout(loadList, 800); // give the sheet a moment, then refresh
+        })
+        .catch(function () {
+          showNote("Hmm, something went wrong sending your RSVP. Please try again.", "err");
+        })
+        .finally(function () {
+          btn.disabled = false;
+          btn.textContent = "Send my RSVP 🎬";
+        });
+    });
+
+    // ---- Live list via JSONP (works around cross-origin limits) ----
+    function loadList() {
+      if (!SCRIPT_URL || SCRIPT_URL.indexOf("PASTE_YOUR") === 0) {
+        board.innerHTML = '<div class="empty">The live list turns on once the host connects the backend.</div>';
+        return;
+      }
+      const s = document.createElement("script");
+      s.src = SCRIPT_URL + "?callback=renderList&cacheBust=" + Date.now();
+      s.onerror = function () {
+        board.innerHTML = '<div class="empty">Couldn\'t load the lineup right now.</div>';
+        s.remove();
+      };
+      document.body.appendChild(s);
+    }
+
+    window.renderList = function (rows) {
+      const s = document.querySelector('script[src*="callback=renderList"]');
+      if (s) s.remove();
+
+      const coming = (rows || []).filter(function (r) {
+        return String(r.attending).toLowerCase() === "yes";
+      });
+
+      if (!coming.length) {
+        board.innerHTML = '<div class="empty">No RSVPs yet — be the first on the carpet! ✨</div>';
+        return;
+      }
+
+      board.innerHTML = coming.map(function (r) {
+        const initial = (r.name || "?").trim().charAt(0).toUpperCase();
+        const party = Number(r.party) > 1 ? " (+" + (Number(r.party) - 1) + ")" : "";
+        const dish = r.dish ? r.dish : "Bringing a surprise 🎁";
+        const cat = r.category ? '<span class="cat">' + escapeHtml(r.category) + "</span>" : "";
+        return (
+          '<div class="guest">' +
+            '<div class="badge">' + escapeHtml(initial) + "</div>" +
+            "<div>" +
+              '<div class="who">' + escapeHtml(r.name || "Guest") + party + "</div>" +
+              '<div class="what">' + escapeHtml(dish) + "</div>" +
+            "</div>" +
+            cat +
+          "</div>"
+        );
+      }).join("");
+    };
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, function (c) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+      });
+    }
+
+    loadList();
+  </script>
 </body>
 </html>
